@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Herramienta de Reportes / Report Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+body {
+font-family: sans-serif;
+max-width: 600px;
+margin: 2rem auto;
+padding: 1rem;
+}
+label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: bold;
+}
+input[type="text"] {
+width: 100%;
+padding: 0.5rem;
+margin-bottom: 1rem;
+box-sizing: border-box;
+}
+input[type="text"].required {
+background-color: #ffff99;
+}
+button {
+padding: 0.5rem 1rem;
+font-size: 1rem;
+}
+pre {
+margin-top: 1.5rem;
+padding: 1rem;
+background: #f4f4f4;
+white-space: pre-wrap;
+}
+fieldset {
+box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+
+<h1>Herramienta de Reportes / Report Tool</h1>
+
+<p>Ingrese información sobre una actividad observada, haga clic en "Generar Texto" y copie/pegue su reporte para enviarlo en un chat, correo electrónico u otro formulario.</p><p>Enter information about an observed activity, click "Generate Text", and copy/paste your report to send in a chat, email, or other form.</p>
+<p>Los campos en amarillo deben llenarse antes de poder generar un reporte. Los otros campos no son necesarios; puede llenarlos después y cambiar el tipo de reporte a "Actualización".</p><p>Fields in yellow must be filled out before you can generate a report. Other fields aren't necessary; you can fill them out later and change the report type to "Update".</p>
+
+    
+<form id="reportForm">
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>Tipo de reporte / Type of report</strong></legend>
+<div>
+<input type="radio" id="typeNew" name="reporttype" value="Nuevo / New" checked />
+<label for="typeNew">Nuevo / New</label>
+<input type="radio" id="typeUpdate" name="reporttype" value="Actualización / Update" />
+<label for="typeUpdate">Actualización / Update</label>
+</div>
+<p>¿Es este un reporte completamente nuevo o es una actualización de algo que ya ha sido reportado?</p><p>Is this a brand-new report or is this an update of something that has already been reported?</p>
+</fieldset>
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>¿Estás observando personalmente esta actividad? / Are you personally observing this activity?</strong></legend>
+<div>
+<input type="radio" id="onsiteYes" name="onsite" value="Sí / Yes" />
+<label for="onsiteYes">Sí / Yes</label>
+<input type="radio" id="onsiteNo" name="onsite" value="No / No" checked />
+<label for="onsiteNo">No / No</label>
+</div>
+<p>¿Está usted observando personalmente la actividad? ¿O alguien más le está reportando esta actividad?</p><p>Are you personally observing the activity? Or is someone else reporting this activity to you?</p>
+</fieldset>
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>Necesito refuerzo / I need backup</strong></legend>
+<div>
+<input type="radio" id="backupYes" name="backup" value="Sí / Yes" />
+<label for="backupYes">Sí / Yes</label>
+<input type="radio" id="backupNo" name="backup" value="No / No" checked />
+<label for="backupNo">No / No</label>
+</div>
+<p>¿Usted o el reportero necesitan refuerzo inmediato?</p><p>Do you or the reporter need immediate backup?</p>
+</fieldset>
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>Ubicación / Location</strong></legend>
+<div>
+<input type="text" id="location" name="location" class="required"  />
+<p>OBLIGATORIO - Dirección ESPECÍFICA <strong style="color: red;">incluyendo el PUEBLO O CIUDAD</strong>, nombre del edificio o negocio, cruce de calles, etc. Un respondiente debe poder llegar a esta ubicación basándose únicamente en esta información</p>
+<p>MANDATORY - SPECIFIC Address <strong style="color: red;">including the TOWN OR CITY</strong>, building or business name, intersection, etc. A responder should be able to get to this location based only on this information</p>
+</div>
+</fieldset>
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>Hora Primera Observación / Time First Observed</strong></legend>
+<input type="text" id="time" name="time" class="required"  />
+<p>OBLIGATORIO - ¿Qué día y hora se observó esta actividad por primera vez? "7:30am martes 16 dic" es útil. "Ahora" o "Ayer" no son útiles</p><p>MANDATORY - What day and time was this activity first observed? "7:30am Tues 16 Dec" is helpful. "Now" or "Yesterday" are not helpful</p>
+</fieldset>
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>Actividad / Activity</strong></legend>
+<input type="text" id="activity" name="activity" class="required"  />
+<p>OBLIGATORIO - Punto de Control Vehicular (deteniendo cada carro que pasa), Parada de Tráfico (persiguió y detuvo un carro en particular), Punto de Control a Pie (deteniendo personas a pie y pidiendo papeles), etc.</p><p>MANDATORY - Vehicle Checkpoint (Stopping every car that passes), Traffic stop: (pursued and stopped one particular car), On-foot Checkpoint (stopping people on foot and asking for papers), etc</p>
+</fieldset>
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>Número de oficiales, de vehículos / Number of officers, vehicles</strong></legend>
+<input type="text" id="size" name="size" />
+</fieldset>
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>Agencias / Agencies</strong></legend>
+<input type="text" id="agencies" name="agencies" />
+<p>Cualquier información de identificación de agencias en uniformes, placas, calcomanías de vehículos, etc.</p><p>Any agency-identifing information on any uniforms, badges, vehicle decals, etc</p>
+</fieldset>
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>Equipo / Equipment</strong></legend>
+<input type="text" id="equipment" name="equipment" />
+<p>Descripciones de vehículos, descripciones de armas (pistolas o armas largas), etc.</p><p>Vehicle descriptions, weapon descriptions (pistols or long guns), etc</p>
+</fieldset>
+
+<fieldset style="margin: 1rem 0;">
+<legend><strong>Otras Notas / Other Notes</strong></legend>
+<input type="text" id="notes" name="notes" />
+<p>Cualquier otra nota que pueda ser útil</p><p>Any other notes which might be helpful</p>
+</fieldset>
+
+<button type="submit" id="submitBtn" disabled>Generar Texto / Generate Text</button>
+</form>
+
+<pre id="output"></pre>
+
+<script>
+// Function to check if all required fields are filled
+function checkRequiredFields() {
+    const location = document.getElementById('location').value.trim();
+    const time = document.getElementById('time').value.trim();
+    const activity = document.getElementById('activity').value.trim();
+    const submitBtn = document.getElementById('submitBtn');
+
+    submitBtn.disabled = !(location && time && activity);
+}
+
+// Add event listeners to required fields
+document.getElementById('location').addEventListener('input', checkRequiredFields);
+document.getElementById('time').addEventListener('input', checkRequiredFields);
+document.getElementById('activity').addEventListener('input', checkRequiredFields);
+
+document.getElementById('reportForm').addEventListener('submit', function (e) {
+e.preventDefault();
+
+const reporttype = document.querySelector('input[name="reporttype"]:checked').value.trim();
+const onsite = document.querySelector('input[name="onsite"]:checked').value.trim();
+const backup = document.querySelector('input[name="backup"]:checked').value.trim();
+const location = document.getElementById('location').value.trim();
+const time = document.getElementById('time').value.trim();
+const activity = document.getElementById('activity').value.trim();
+const size = document.getElementById('size').value.trim();
+const agencies = document.getElementById('agencies').value.trim();
+const equipment = document.getElementById('equipment').value.trim();
+const notes = document.getElementById('notes').value.trim();
+
+const outputText = `REPORTE DE ACTIVIDAD / ACTIVITY REPORT
+Tipo de reporte / Report type: ${reporttype}
+Estoy en el lugar / I am on-site: ${onsite}
+Necesito refuerzo / Need backup: ${backup}
+Ubicación / Location: ${location}
+Hora / Time: ${time}
+Actividad / Activity: ${activity}
+Número de oficiales / Number of officers: ${size}
+Agencias / Agencies: ${agencies}
+Equipo / Equipment: ${equipment}
+Notas / Notes: ${notes}`;
+
+document.getElementById('output').textContent = outputText;
+});
+</script>
+
+</body>
+</html>
