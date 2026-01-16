@@ -61,16 +61,15 @@ display: none;
 
 <p>Ingrese información sobre una actividad observada, haga clic en "Generar Texto" y copie/pegue su reporte para enviarlo en un chat, correo electrónico u otro formulario.</p>
 <p>Los campos en amarillo deben llenarse antes de poder generar un reporte. Los otros campos no son necesarios; puede llenarlos después y cambiar el tipo de reporte a "Actualización".</p><p class="en">Enter information about an observed activity, click "Generate Text", and copy/paste your report to send in a chat, email, or other form.</p><p class="en">Fields in yellow must be filled out before you can generate a report. Other fields aren't necessary; you can fill them out later and change the report type to "Update".</p>
-
     
 <form id="reportForm">
 
 <fieldset>
 <legend><strong>Tipo de reporte / <span class="en">Type of report</span></strong></legend>
 <div class="required-radio">
-<input type="radio" id="reporttypeNew" name="reporttype" value="Nuevo / New" />
+<input type="radio" id="reporttypeNew" name="reporttype" value="New" />
 <label for="reporttypeNew">Nuevo / <span class="en">New</span></label>
-<input type="radio" id="reporttypeUpdate" name="reporttype" value="Actualización / Update" />
+<input type="radio" id="reporttypeUpdate" name="reporttype" value="Update" />
 <label for="reporttypeUpdate">Actualización / <span class="en">Update</span></label>
 </div>
 <p>¿Es este un reporte completamente nuevo o es una actualización de algo que ya ha sido reportado?</p><p class="en">Is this a brand-new report or is this an update of something that has already been reported?</p>
@@ -79,18 +78,18 @@ display: none;
 <fieldset style="margin: 1rem 0;">
 <legend><strong>¿Estás observando personalmente esta actividad? / <span class="en">Are you personally observing this activity?</span></strong></legend>
 <div class="required-radio">
-<input type="radio" id="onsiteYes" name="onsite" value="Sí / Yes" />
+<input type="radio" id="onsiteYes" name="onsite" value="Yes" />
 <label for="onsiteYes">Sí / <span class="en">Yes</span></label>
-<input type="radio" id="onsiteNo" name="onsite" value="No / No" />
+<input type="radio" id="onsiteNo" name="onsite" value="No" />
 <label for="onsiteNo">No / <span class="en">No</span></label>
 </div>
 <p>¿Está usted observando personalmente la actividad? ¿O alguien más le está reportando esta actividad?</p><p class="en">Are you personally observing the activity? Or is someone else reporting this activity to you?</p>
 <div id="sourceField" style="margin-top: 1rem;">
 <legend><strong>Fuente de Confianza / <span class="en">Trusted Source</span></strong></legend>
 <div class="required-radio">
-<input type="radio" id="sourceYes" name="source" value="Sí / Yes" />
+<input type="radio" id="sourceYes" name="source" value="Yes" />
 <label for="sourceYes">Sí / <span class="en">Yes</span></label>
-<input type="radio" id="sourceNo" name="source" value="No / No" />
+<input type="radio" id="sourceNo" name="source" value="No" />
 <label for="sourceNo">No / <span class="en">No</span></label>
 </div>
 <p id="sourceWarning" class="warning">Por favor, solo envíe reportes de una fuente de confianza / <span class="en">Please only submit reports from a trusted source</span></p>
@@ -101,9 +100,9 @@ display: none;
 <fieldset style="margin: 1rem 0;">
 <legend><strong>Necesito refuerzo / <span class="en">I need backup</span></strong></legend>
 <div>
-<input type="radio" id="backupYes" name="backup" value="Sí / Yes" />
+<input type="radio" id="backupYes" name="backup" value="Yes" />
 <label for="backupYes">Sí / <span class="en">Yes</span></label>
-<input type="radio" id="backupNo" name="backup" value="No / No" />
+<input type="radio" id="backupNo" name="backup" value="No" />
 <label for="backupNo">No / <span class="en">No</span></label>
 </div>
 <p>¿Usted o el reportero necesitan refuerzo inmediato?</p><p class="en">Do you or the reporter need immediate backup?</p>
@@ -161,47 +160,13 @@ display: none;
 </form>
 
 <div id="outputSection" style="display: none; margin-top: 1.5rem;">
-<pre id="output"></pre>
-<button type="button" id="copyBtn" style="margin-bottom: 0.5rem;">Copiar al Portapapeles / <span class="en">Copy to Clipboard</span></button>
+<pre id="bilingualOutput"></pre>
+<button type="button" id="bilingualCopyBtn" style="margin-bottom: 0.5rem;">Copiar al Portapapeles / <span class="en">Copy to Clipboard</span></button>
+<pre id="englishOutput"></pre>
+<button type="button" id="englishCopyBtn" style="margin-bottom: 0.5rem;"><span class="en">Copy to Clipboard</span></button>
 </div>
 
 <script>
-// Function to toggle source field based on onsite selection
-/* function toggleSourceField() {
-    const onsiteNo = document.getElementById('onsiteNo').checked;
-    const sourceField = document.getElementById('sourceField');
-    
-    if (onsiteNo) {
-        sourceField.style.display = 'block';
-        // Uncheck both source options when switching to "not onsite"
-        sourceYes.checked = false;
-        sourceNo.checked = false;
-    } else {
-        sourceField.style.display = 'none';
-    }
-}
-
-// Initialize on page load
-//toggleSourceField();
-
-// Function to toggle warning messages
-function toggleWarnings() {
-    const sourceNo = document.getElementById('sourceNo').checked;
-    const sourceWarning = document.getElementById('sourceWarning');
-    const buttonWarning = document.getElementById('buttonWarning');
-    
-    if (sourceNo) {
-        sourceWarning.style.display = 'block';
-        buttonWarning.style.display = 'block';
-    } else {
-        sourceWarning.style.display = 'none';
-        buttonWarning.style.display = 'none';
-    }
-}
-
-//toggleWarnings();
-    */
-    
 // Function to check if all required fields are filled
 function validateInputs() {
     // Input fields
@@ -251,28 +216,6 @@ validateInputs();
 // Add event listeners
 document.getElementById('reporttypeNew').addEventListener('change', validateInputs);
 document.getElementById('reporttypeUpdate').addEventListener('change', validateInputs);    
-/*document.getElementById('onsiteYes').addEventListener('change', function() {
-        toggleWarnings();
-        toggleSourceField();
-        validateInputs();
-    }
-);
-document.getElementById('onsiteNo').addEventListener('change', function() {
-        toggleWarnings();
-        toggleSourceField();
-        validateInputs();
-    }
-);
-document.getElementById('sourceYes').addEventListener('change', function() {
-        toggleWarnings();
-        validateInputs();
-    }
-);
-document.getElementById('sourceNo').addEventListener('change', function() {
-        toggleWarnings();
-        validateInputs();
-    }
-);*/
 document.getElementById('onsiteYes').addEventListener('change', validateInputs);
 document.getElementById('onsiteNo').addEventListener('change', validateInputs);
 document.getElementById('sourceYes').addEventListener('change', validateInputs);
@@ -285,11 +228,19 @@ document.getElementById('activity').addEventListener('input', validateInputs);
 function generateText(e) {
     e.preventDefault();
 
-    const reporttype = document.querySelector('input[name="reporttype"]:checked').value.trim();
-    const onsite = document.querySelector('input[name="onsite"]:checked').value.trim();
-    const source = document.getElementById('onsiteNo').checked ? document.querySelector('input[name="source"]:checked').value.trim() : 'Yo mismo / Myself';
-    const backupChecked = document.querySelector('input[name="backup"]:checked');
-    const backup = backupChecked ? backupChecked.value.trim() : '';
+    const reporttypeBL = document.getElementById('reporttypeNew').checked ? "Nuevo / New" : "Actualización / Update";
+    const reporttypeEN = document.getElementById('reporttypeNew').checked ? "New" : "Update";
+    const onsiteBL = document.getElementById('onsiteYes').checked ? "Sí / Yes" : "No / No";
+    const onsiteEN = document.getElementById('onsiteYes').checked ? "Yes" : "No";
+    backupBL = "-"
+    backupEN = "-"
+    if (document.getElementById('backupYes').checked) {
+        backupBL = "Sí / Yes";
+        backupEN = "Yes";
+    } else if (document.getElementById('backupNo').checked) {
+        backupBL = "No / No";
+        backupEN = "No";
+    }
     const location = document.getElementById('location').value.trim();
     const date = document.getElementById('date').value.trim();
     const time = document.getElementById('time').value.trim();
@@ -300,11 +251,10 @@ function generateText(e) {
     const equipment = document.getElementById('equipment').value.trim();
     const notes = document.getElementById('notes').value.trim();
 
-    const outputText = `REPORTE DE ACTIVIDAD / ACTIVITY REPORT
-Tipo de reporte / Report type: ${reporttype}
-Estoy en el lugar / I am on-site: ${onsite}
-Fuente de Confianza / Trusted Source: ${source}
-Necesito refuerzo / Need backup: ${backup}
+    const bilingualOutputText = `REPORTE DE ACTIVIDAD / ACTIVITY REPORT
+Tipo de reporte / Report type: ${reporttypeBL}
+Estoy en el lugar / I am on-site: ${onsiteBL}
+Necesito refuerzo / Need backup: ${backupBL}
 Ubicación / Location: ${location}
 Hora / Time: ${datetime}
 Actividad / Activity: ${activity}
@@ -313,7 +263,20 @@ Agencias / Agencies: ${agencies}
 Equipo / Equipment: ${equipment}
 Notas / Notes: ${notes}`;
 
-    document.getElementById('output').textContent = outputText;
+    const englishOutputText = `ACTIVITY REPORT
+Report type: ${reporttypeEN}
+I am on-site: ${onsiteEN}
+Need backup: ${backupEN}
+Location: ${location}
+Time: ${datetime}
+Activity: ${activity}
+Number of officers: ${size}
+Agencies: ${agencies}
+Equipment: ${equipment}
+Notes: ${notes}`;
+
+    document.getElementById('bilingualOutput').textContent = bilingualOutputText;
+    document.getElementById('englishOutput').textContent = englishOutputText;
     document.getElementById('outputSection').style.display = 'block';
 }
     
