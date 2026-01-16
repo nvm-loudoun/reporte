@@ -282,11 +282,11 @@ Notes: ${notes}`;
     
 document.getElementById('reportForm').addEventListener('submit', generateText);
 
-// Copy to clipboard functionality
-document.getElementById('copyBtn').addEventListener('click', function() {
-        const outputText = document.getElementById('output').textContent;
+// Bilingual copy to clipboard
+document.getElementById('bilingualCopyBtn').addEventListener('click', function() {
+        const outputText = document.getElementById('bilingualOutput').textContent;
         navigator.clipboard.writeText(outputText).then(function() {
-                const btn = document.getElementById('copyBtn');
+                const btn = document.getElementById('bilingualCopyBtn');
                 const originalText = btn.innerHTML;
                 btn.innerHTML = '¡Copiado! / <span class="en">Copied!</span>';
                 setTimeout(function() {
@@ -299,6 +299,24 @@ document.getElementById('copyBtn').addEventListener('click', function() {
        );
     }
 );
+
+// English copy to clipboard
+document.getElementById('englishCopyBtn').addEventListener('click', function() {
+        const outputText = document.getElementById('englishOutput').textContent;
+        navigator.clipboard.writeText(outputText).then(function() {
+                const btn = document.getElementById('englishCopyBtn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="en">Copied!</span>';
+                setTimeout(function() {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            }
+        ).catch(function(err) {
+                alert('Error copying: ' + err);
+            }
+       );
+    }
+);    
 </script>
 
 </body>
